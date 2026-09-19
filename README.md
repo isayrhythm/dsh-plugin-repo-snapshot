@@ -153,6 +153,7 @@ Windows 下私钥默认在 `C:\Users\<你>\.dsh\repo-snapshot\keys\private.pem`�
 | `oss.region` | — | 如 `oss-cn-hangzhou` |
 | `oss.bucket` | — | bucket 名 |
 | `oss.prefix` | `repo-snapshots/` | 对象键前缀 |
+| `oss.signatureVersion` | `auto` | OSS 签名方案：`auto`（先试 V4，失败回退 V1）/ `v4` / `v1` |
 | `oss.localDir` | `<DSH_HOME>/repo-snapshots` | 本机模式根目录 |
 | `encryption.enabled` | `true` | 是否加密 |
 | `encryption.algorithm` | `aes-256-gcm` | `aes-256-gcm` / `aes-256-ctr` |
@@ -207,11 +208,34 @@ scripts/          # keygen / decrypt
 - AK/SK 也可完全走环境变量，不落盘
 - 快照**只增不减**：插件不负责删除旧快照，请自行制定保留策略
 
+## 故障排查
+
+**OSS 报签名错误 / 403**
+
+插件默认 `signatureVersion: auto`：先按 **V4（OSS4-HMAC-SHA256）** 签名，失败再回退 **V1**。
+两种都失败时，错误信息会同时列出两次尝试的 HTTP 状态与服务端返回，便于定位。
+
+- 若明确知道 bucket 只接受某一种，可在 `settings.json` 里固定：
+  ```json
+  { "oss": { "signatureVersion": "v4" } }
+  ```
+- V4 的凭据作用域使用**去掉 `oss-` 前缀**的 region（`oss-cn-hangzhou` → `cn-hangzhou`），插件会自动转换
+- 403 也可能是 RAM 权限不足：需要目标 bucket 的 `PutObject` 与 `DeleteObject`
+
+**设置页看不到「仓库快照备份」**
+
+客户端 bundle 只在 `dsh web` 启动时加载，改完插件必须重启；另外确认 profile 的 `cordis.patch.yml` 里已挂载该插件行。
+
+**重启后快照上传到旧位置**
+
+设置优先级是 `settings.json` > `cordis.patch.yml`。检查 `<DSH_HOME>/repo-snapshot/settings.json` 是否残留了旧值。
+
 ## 已知限制
 
 - 超过 `maxFileSizeMB` 的文件会被跳过（有计数提示）；大仓库的 Git pack 文件可能被漏掉，必要时调大该值
 - 尚未提供「从 OSS 一键下载并恢复」的脚本，目前从控制台或 `ossutil` 取回两个文件后跑 `decrypt.mjs`
 - 客户端界面依赖 DSH 的 `settings.section` Slot，DSH 大版本升级后可能需要适配
+- 快照是**全量**的，每次都会重新打包整个工作区；增量备份尚未实现
 
 ## License
 
