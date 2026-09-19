@@ -15,6 +15,15 @@
     "aliyun",
     "encryption"
   ],
+  "author": "isayrhythm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isayrhythm/dsh-plugin-repo-snapshot.git"
+  },
+  "homepage": "https://github.com/isayrhythm/dsh-plugin-repo-snapshot#readme",
+  "bugs": {
+    "url": "https://github.com/isayrhythm/dsh-plugin-repo-snapshot/issues"
+  },
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
@@ -27,6 +36,7 @@
     "scripts",
     "cordis.patch.yml",
     "README.md",
+    "README.en.md",
     "LICENSE"
   ],
   "dsh": {

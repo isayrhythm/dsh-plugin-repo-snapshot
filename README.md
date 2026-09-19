@@ -1,5 +1,7 @@
 # dsh-plugin-repo-snapshot
 
+[English](README.en.md) | 简体中文
+
 给 [DeepSeek Harness](https://www.npmjs.com/package/@deepseek-ai/dsh)（DSH）用的**工作区加密快照备份**插件。
 
 把当前项目（含 `.git`）打包、加密，然后存到**你自己的**目录或**你自己的**阿里云 OSS 里。解密私钥只留在本机，任何时候都不上传。设置页里可视化配置，可随时开关。
