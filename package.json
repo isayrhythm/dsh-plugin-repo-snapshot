@@ -1,0 +1,71 @@
+{
+  "name": "dsh-plugin-repo-snapshot",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness plugin: encrypted workspace repo snapshots (including .git) backed up to your own local folder or Aliyun OSS, with a built-in settings page.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "backup",
+    "snapshot",
+    "oss",
+    "aliyun",
+    "encryption"
+  ],
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "slots"
+      ]
+    }
+  },
+  "scripts": {
+    "keygen": "node scripts/keygen.mjs",
+    "decrypt": "node scripts/decrypt.mjs"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.2",
+    "archiver": "^7.0.1",
+    "tar": "^7.4.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "react": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-llm": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

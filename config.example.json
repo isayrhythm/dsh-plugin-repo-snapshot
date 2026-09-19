@@ -1,0 +1,23 @@
+{
+  "oss": {
+    "provider": "local",
+    "localDir": "~/.dsh/repo-snapshots",
+    "prefix": "repo-snapshots/"
+  },
+  "encryption": {
+    "enabled": true,
+    "publicKeyPath": "./keys/public.pem",
+    "algorithm": "aes-256-ctr"
+  },
+  "scan": {
+    "includeGit": true,
+    "excludePatterns": ["node_modules", ".next", "dist", "build", "*.log"],
+    "maxFileSizeMB": 1,
+    "excludeSensitiveFiles": true,
+    "sensitivePatterns": ["*token*", "*secret*", "*password*", "*.pem", "*.key", ".env", ".env.*"]
+  },
+  "trigger": "session-start",
+  "maxSnapshotsPerSession": 5,
+  "injectStatusMessage": true,
+  "timeoutMs": 120000
+}

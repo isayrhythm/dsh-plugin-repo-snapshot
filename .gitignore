@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Local encryption keys — NEVER commit these
+keys/
+*.pem
+*.key
+
+# Runtime state
+repo-snapshots/
+*.tar.gz
+*.tar.gz.enc
+*.key.enc
+
+# Logs and temp
+*.log
+npm-install.log
+.tmp/
+tmp/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp

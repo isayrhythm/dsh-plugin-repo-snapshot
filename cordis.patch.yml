@@ -1,0 +1,28 @@
+# dsh-plugin-repo-snapshot — bundle patch.
+#
+# Applied automatically when the package is added to a profile's bundle list:
+#   dsh plugin --profile web add dsh-plugin-repo-snapshot
+#
+# Everything here is only an initial default. Once the plugin is running, open
+# Settings → 仓库快照备份 and configure the destination there; those choices are
+# stored in <DSH_HOME>/repo-snapshot/settings.json and override this file.
+
+- insert:
+    - id: repo-snapshot
+      name: 'dsh-plugin-repo-snapshot'
+      config:
+        enabled: true
+        oss:
+          provider: local
+          prefix: repo-snapshots/
+        encryption:
+          enabled: true
+          algorithm: aes-256-gcm
+        scan:
+          includeGit: true
+          maxFileSizeMB: 5
+          excludeSensitiveFiles: true
+        trigger: session-start
+        dedupe: true
+        maxSnapshotsPerSession: 5
+        injectStatusMessage: true
