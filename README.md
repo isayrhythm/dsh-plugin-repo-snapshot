@@ -156,7 +156,7 @@ Windows 下私钥默认在 `C:\Users\<你>\.dsh\repo-snapshot\keys\private.pem`�
 | `oss.bucket` | — | bucket 名 |
 | `oss.prefix` | `repo-snapshots/` | 对象键前缀 |
 | `oss.signatureVersion` | `auto` | OSS 签名方案：`auto`（先试 V4，失败回退 V1）/ `v4` / `v1` |
-| `oss.localDir` | `<DSH_HOME>/repo-snapshots` | 本机模式根目录 |
+| `oss.localDir` | `<DSH_HOME>` | 本机模式根目录；前缀会追加在其后 |
 | `encryption.enabled` | `true` | 是否加密 |
 | `encryption.algorithm` | `aes-256-gcm` | `aes-256-gcm` / `aes-256-ctr` |
 | `scan.includeGit` | `true` | 是否包含 `.git` |

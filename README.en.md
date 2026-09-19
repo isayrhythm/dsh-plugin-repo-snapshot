@@ -156,7 +156,7 @@ The settings page writes `<DSH_HOME>/repo-snapshot/settings.json`, which **takes
 | `oss.bucket` | — | bucket name |
 | `oss.prefix` | `repo-snapshots/` | object key prefix |
 | `oss.signatureVersion` | `auto` | OSS signing scheme: `auto` (V4, then V1) / `v4` / `v1` |
-| `oss.localDir` | `<DSH_HOME>/repo-snapshots` | root folder in local mode |
+| `oss.localDir` | `<DSH_HOME>` | root folder in local mode; the prefix is appended to it |
 | `encryption.enabled` | `true` | encrypt at all |
 | `encryption.algorithm` | `aes-256-gcm` | `aes-256-gcm` / `aes-256-ctr` |
 | `scan.includeGit` | `true` | include `.git` |
